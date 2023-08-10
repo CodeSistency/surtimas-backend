@@ -50,7 +50,7 @@ const userSchema = new Schema({
         required: true
     },
     refreshToken: String,
-    pedidos: [orderSchema],
+    // pedidos: [orderSchema],
 });
 
 module.exports = mongoose.model('User', userSchema);
