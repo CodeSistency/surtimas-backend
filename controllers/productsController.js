@@ -67,6 +67,7 @@ const createNewProduct = async (req, res) => {
 
     
     const imageFiles = req.files;
+    
 
 
     if (!req?.body?.titulo || !req?.body?.descripcion) {
@@ -74,7 +75,7 @@ const createNewProduct = async (req, res) => {
         
     }
     console.log(req.body)
-    const {titulo, precio, precio_mayor, descripcion, codigo, tipo, sexo, tallas_zapatos, tallas} = req.body
+    const {titulo, precio, precio_mayor, descripcion, codigo, tipo, sexo, tallas_zapatos, tallas, imagen, imagenes} = req.body
 
    
     try {
@@ -91,7 +92,8 @@ const createNewProduct = async (req, res) => {
             codigo: codigo,
             tallas: JSON.parse(tallas),
             tallas_zapatos: JSON.parse(tallas_zapatos),
-            imagenes: images
+            imagen: imagen,
+            imagenes: imagenes
             
             
             

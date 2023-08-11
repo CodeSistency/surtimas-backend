@@ -90,6 +90,11 @@ const productSchema = new Schema({
     type: String,
     default: "",
   },
+  imagen: {
+    type: String,
+    default: "",
+  },
+  
   imagenes: [String],
 
 }, { timestamps: true });
