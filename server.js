@@ -39,18 +39,34 @@ app.use(cookieParser());
 app.use('/', express.static(path.join(__dirname, '/public')));
 
 // routes
+
 app.use('/', require('./routes/root'));
 app.use('/register', require('./routes/register'));
 app.use('/auth', require('./routes/auth'));
 app.use('/refresh', require('./routes/refresh'));
 app.use('/logout', require('./routes/logout'));
 
-app.use(verifyJWT);
+// Apply verifyJWT middleware only to specific routes that require authentication
+app.use('/users', verifyJWT, require('./routes/api/users'));
+app.use('/products', verifyJWT, require('./routes/api/products'));
+app.use('/sales', verifyJWT, require('./routes/api/sales'));
 
-app.use('/users', require('./routes/api/users'));
-
+// Allow GET requests without authentication
 app.use('/products', require('./routes/api/products'));
 app.use('/sales', require('./routes/api/sales'));
+
+// app.use('/', require('./routes/root'));
+// app.use('/register', require('./routes/register'));
+// app.use('/auth', require('./routes/auth'));
+// app.use('/refresh', require('./routes/refresh'));
+// app.use('/logout', require('./routes/logout'));
+
+// app.use(verifyJWT);
+
+// app.use('/users', require('./routes/api/users'));
+
+// app.use('/products', require('./routes/api/products'));
+// app.use('/sales', require('./routes/api/sales'));
 
 app.all('*', (req, res) => {
     res.status(404);

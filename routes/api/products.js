@@ -20,15 +20,14 @@ const upload = multer({ storage: storage })
 router.route('/')
     .get(productController.getAllProducts)
     .post(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor), upload.array('imagenes', 5),  productController.createNewProduct)
-    // .put(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor), productController.updateProduct)
-    // .delete(verifyRoles(ROLES_LIST.Admin), productController.deleteProduct);
+    
     
 
 router.route('/:id')
     .get(productController.getProduct)
     .delete(verifyRoles(ROLES_LIST.Admin),  productController.deleteProduct)
     .put(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor), productController.updateProduct)
-    // .put(verifyRoles(ROLES_LIST.Admin), productController.updateProduct);
+    
     
 
     
