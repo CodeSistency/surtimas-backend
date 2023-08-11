@@ -52,7 +52,7 @@ app.use('/products', verifyJWT, require('./routes/api/products'));
 app.use('/sales', verifyJWT, require('./routes/api/sales'));
 
 // Allow GET requests without authentication
-app.use('/products', require('./routes/api/products'));
+app.use('/productos', require('./routes/api/productos'));
 app.use('/sales', require('./routes/api/sales'));
 
 // app.use('/', require('./routes/root'));
