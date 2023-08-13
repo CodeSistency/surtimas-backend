@@ -93,7 +93,7 @@ const createNewProduct = async (req, res) => {
             tallas: JSON.parse(tallas),
             tallas_zapatos: JSON.parse(tallas_zapatos),
             imagen: imagen,
-            imagenes: imagenes
+            imagenes: JSON.parse(imagenes)
             
             
             
