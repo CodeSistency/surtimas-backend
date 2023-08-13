@@ -119,9 +119,14 @@ const updateProduct = async (req, res) => {
     if (req.body?.titulo) product.titulo = req.body.titulo;
     if (req.body?.descripcion) product.descripcion = req.body.descripcion;
     if (req.body?.precio) product.precio = req.body.precio;
+    if (req.body?.precio_mayor) product.precio_mayor = req.body.precio_mayor;
+    if (req.body?.codigo) product.codigo = req.body.codigo;
+    if (req.body?.sexo) product.sexo = req.body.sexo;
+    if (req.body?.tipo) product.tipo = req.body.tipo;
     if (req.body?.imagen) product.imagen_primaria = req.body.imagen;
-    if (req.body?.imagenes) product.imagenes_secundarias = req.body.images;
+    if (req.body?.imagenes) product.imagenes = req.body.imagenes;
     if (req.body?.tallas) product.tallas = req.body.tallas;
+    if (req.body?.tallas_zapatos) product.tallas = req.body.tallas_zapatos;
     
     const result = await Product.findByIdAndUpdate(req.params.id, product);
     res.json(result);
