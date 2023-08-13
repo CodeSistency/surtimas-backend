@@ -107,30 +107,64 @@ const createNewProduct = async (req, res) => {
     }
 }
 
+// const updateProduct = async (req, res) => {
+//     if (!req?.params?.id) {
+//         return res.status(400).json({ 'message': 'ID parameter is required.' });
+//     }
+
+//     const product = await Product.findOne({ _id: req.params.id }).exec();
+//     if (!product) {
+//         return res.status(204).json({ "message": `No Product matches ID ${req.params.id}.` });
+//     }
+//     if (req.body?.titulo) product.titulo = req.body.titulo;
+//     if (req.body?.descripcion) product.descripcion = req.body.descripcion;
+//     if (req.body?.precio) product.precio = req.body.precio;
+//     if (req.body?.precio_mayor) product.precio_mayor = req.body.precio_mayor;
+//     if (req.body?.codigo) product.codigo = req.body.codigo;
+//     if (req.body?.sexo) product.sexo = req.body.sexo;
+//     if (req.body?.tipo) product.tipo = req.body.tipo;
+//     if (req.body?.imagen) product.imagen = req.body.imagen;
+//     if (req.body?.imagenes) product.imagenes = req.body.imagenes;
+//     if (req.body?.tallas) product.tallas = req.body.tallas;
+//     if (req.body?.tallas_zapatos) product.tallas = req.body.tallas_zapatos;
+    
+//     const result = await Product.findByIdAndUpdate(req.params.id, product);
+//     res.json(result);
+// }
+
 const updateProduct = async (req, res) => {
     if (!req?.params?.id) {
         return res.status(400).json({ 'message': 'ID parameter is required.' });
     }
 
-    const product = await Product.findOne({ _id: req.params.id }).exec();
-    if (!product) {
-        return res.status(204).json({ "message": `No Product matches ID ${req.params.id}.` });
+    try {
+        const product = await Product.findOne({ _id: req.params.id });
+
+        if (!product) {
+            return res.status(404).json({ "message": `No Product matches ID ${req.params.id}.` });
+        }
+
+        // Update the product fields based on the request body
+        if (req.body?.titulo) product.titulo = req.body.titulo;
+        if (req.body?.descripcion) product.descripcion = req.body.descripcion;
+        if (req.body?.precio) product.precio = req.body.precio;
+        if (req.body?.precio_mayor) product.precio_mayor = req.body.precio_mayor;
+        if (req.body?.codigo) product.codigo = req.body.codigo;
+        if (req.body?.sexo) product.sexo = req.body.sexo;
+        if (req.body?.tipo) product.tipo = req.body.tipo;
+        if (req.body?.imagen) product.imagen = req.body.imagen;
+        if (req.body?.imagenes) product.imagenes = req.body.imagenes;
+        if (req.body?.tallas) product.tallas = req.body.tallas;
+        if (req.body?.tallas_zapatos) product.tallas = req.body.tallas_zapatos;
+
+        const updatedProduct = await product.save();
+        res.json(updatedProduct);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ 'message': 'Internal server error.' });
     }
-    if (req.body?.titulo) product.titulo = req.body.titulo;
-    if (req.body?.descripcion) product.descripcion = req.body.descripcion;
-    if (req.body?.precio) product.precio = req.body.precio;
-    if (req.body?.precio_mayor) product.precio_mayor = req.body.precio_mayor;
-    if (req.body?.codigo) product.codigo = req.body.codigo;
-    if (req.body?.sexo) product.sexo = req.body.sexo;
-    if (req.body?.tipo) product.tipo = req.body.tipo;
-    if (req.body?.imagen) product.imagen = req.body.imagen;
-    if (req.body?.imagenes) product.imagenes = req.body.imagenes;
-    if (req.body?.tallas) product.tallas = req.body.tallas;
-    if (req.body?.tallas_zapatos) product.tallas = req.body.tallas_zapatos;
-    
-    const result = await Product.findByIdAndUpdate(req.params.id, product);
-    res.json(result);
 }
+
 
 // const deleteProduct = async (req, res) => {
     
