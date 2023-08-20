@@ -17,10 +17,12 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 
-router.route('/')
-    .get(productController.getAllProducts)
+router.route('/').get(productController.getAllProducts)
+
+router.get('/limited', productController.getLimitedProducts);
    
-    
+router.get('/:gender', productController.getProductsByGender);
+router.get('/tipo/:type', productController.getProductsByType);
     
 
 router.route('/:id')
