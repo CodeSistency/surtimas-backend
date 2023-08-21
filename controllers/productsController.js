@@ -162,6 +162,47 @@ const getProduct = async (req, res) => {
     res.json(product);
 }
 
+async function updateComentario (req, res) {
+    // const { username, nombre, precio, precio_mayor, quantity } = req.body;
+    const { username, comentario, id } = req.body;
+    try {
+        
+        
+        console.log(username, comentario, id)
+        // console.log(JSON.parse(username))
+
+        const product = await Product.findOne({ _id: id });
+
+        if (!product) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        // Check if the cart item already exists in the user's cart
+      
+
+  
+            product.comentarios.push({
+                usuario: username,
+                comentario
+                
+            });
+        
+
+        await product.save();
+
+        return res.json({ message: 'Comentario updated successfully' });
+    } catch (error) {
+        console.error('Error:', error);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+const getAllComentarios = async (req, res) => {
+    const product = await Product.find();
+    if (!product) return res.status(204).json({ 'message': 'No Comment found.' });
+    res.json(product.comentarios);
+}
+
 module.exports = {
     getAllProducts,
     getProductsByGender,
@@ -171,4 +212,6 @@ module.exports = {
     deleteProduct,
     getProduct,
     getLimitedProducts,
+    updateComentario,
+    getAllComentarios
 }

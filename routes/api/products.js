@@ -21,7 +21,7 @@ router.route('/')
     .get(productController.getAllProducts)
     .post(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor), upload.array('imagenes', 5),  productController.createNewProduct)
     
-    
+router.put('/comentario', productController.updateComentario);  
 
 router.route('/:id')
     .get(productController.getProduct)

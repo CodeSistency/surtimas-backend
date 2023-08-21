@@ -14,6 +14,20 @@ const colorSchema = new Schema({
   },
 });
 
+const comentarioSchema = new Schema({
+  usuario: {
+    type: String,
+    // required: true,
+    default: ""
+  },
+  comentario: {
+    type: String,
+    // required: true,
+    default: ""
+  },
+  fecha: { type: Date, default: Date.now },
+});
+
 
 
 const productSchema = new Schema({
@@ -94,11 +108,12 @@ const productSchema = new Schema({
     type: String,
     default: "",
   },
-  
   imagenes: {
     type: Array,
     default: [],
   },
+  comentarios: [comentarioSchema]
+
 
 }, { timestamps: true });
 
