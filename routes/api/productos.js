@@ -19,11 +19,17 @@ const upload = multer({ storage: storage })
 
 router.route('/').get(productController.getAllProducts)
 
+router.route('/search').get(productController.searchProducts)
+
 router.put('/comentario', productController.updateComentario);  
 
 router.get('/comentario', productController.getAllComentarios);
 
 router.get('/limited', productController.getLimitedProducts);
+
+router.get('/some', productController.getSomeProducts);
+
+router.get('/random', productController.getAllRandomProducts);
    
 router.get('/gender/:gender', productController.getProductsByGender);
 router.get('/tipo/:type', productController.getProductsByType);
