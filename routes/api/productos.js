@@ -27,6 +27,8 @@ router.get('/comentario', productController.getAllComentarios);
 
 router.get('/limited', productController.getLimitedProducts);
 
+router.get('/qr', productController.getQRProducts);
+
 router.get('/some', productController.getSomeProducts);
 
 router.get('/random', productController.getAllRandomProducts);
