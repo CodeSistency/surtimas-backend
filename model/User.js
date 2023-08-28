@@ -36,6 +36,9 @@ const cartItemSchema = new Schema({
   nombre: {
       type: String
   },
+  codigo: {
+    type: String
+},
   precio: {
     type: Number,
     
