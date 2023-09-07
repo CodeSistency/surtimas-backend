@@ -23,7 +23,7 @@ const newSale = async (req, res) => {
     
         // Loop through the array of sales data and create a new sales tracking record for each sale
         for (const product of productos) {
-          const { codigo, titulo, precio, tallas } = product;
+          const { codigo, titulo, precio, tallas, tallas_zapatos } = product;
           
     
           // Create a new sales tracking record
@@ -33,6 +33,7 @@ const newSale = async (req, res) => {
               titulo,
               precio,
               tallas,
+              tallas_zapatos,
             },
             date: new Date(),
           });
@@ -43,9 +44,12 @@ const newSale = async (req, res) => {
           // Update the quantity in the Products model
           const productToUpdate = await Product.findOne({ codigo });
       if (productToUpdate) {
-        productToUpdate.tallas = tallas; // Update the entire "tallas" object in the product
+        productToUpdate.tallas = tallas;
+        productToUpdate.tallas_zapatos = tallas_zapatos; // Update the entire "tallas" object in the product
         await productToUpdate.save();
       }
+
+      
     }
     
         return res.status(201).json(savedRecords);

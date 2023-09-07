@@ -13,6 +13,7 @@ const colorSchema = new Schema({
       required: true,
       default: 0,
     },
+    seleccionado: {type: Number, default: 0}
   });
 
 //   const cartItemSchema = new Schema({
@@ -55,7 +56,46 @@ precio_mayor: {
   imagen: {
     type: String,
     default: ''
-  }
+  },
+  tallas: {
+    'U': [colorSchema],
+    'XS': [colorSchema],
+    'S': [colorSchema],
+    'M': [colorSchema],
+    'L': [colorSchema],
+    'XL': [colorSchema],
+    '0XL': [colorSchema],
+    '1XL': [colorSchema],
+    '2XL': [colorSchema],
+    '3XL': [colorSchema],
+    '4XL': [colorSchema],
+    '5XL': [colorSchema],
+    'FIT': [colorSchema],
+  },
+  tallas_zapatos: {
+    '25': [colorSchema],
+    '26': [colorSchema],
+    '27': [colorSchema],
+    '28': [colorSchema],
+    '29': [colorSchema],
+    '30': [colorSchema],
+    '31': [colorSchema],
+    '32': [colorSchema],
+    '33': [colorSchema],
+    '34': [colorSchema],
+    '35': [colorSchema],
+    '36': [colorSchema],
+    '37': [colorSchema],
+    '38': [colorSchema],
+    '39': [colorSchema],
+    '40': [colorSchema],
+    '41': [colorSchema],
+    '42': [colorSchema],
+    '43': [colorSchema],
+    '44': [colorSchema],
+    
+    
+  },
 });
   
   const productOrderSchema = new Schema({
