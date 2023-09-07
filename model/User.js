@@ -13,7 +13,7 @@ const colorSchema = new Schema({
       required: true,
       default: 0,
     },
-    seleccionado: {type: Number, default: 0}
+    deseo: {type: Number, default: 0}
   });
 
 //   const cartItemSchema = new Schema({

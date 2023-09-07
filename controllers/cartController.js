@@ -20,11 +20,11 @@ async function getAllCartProducts(req, res) {
 
 async function updateCart (req, res) {
     // const { username, nombre, precio, precio_mayor, quantity } = req.body;
-    const { username, nombre, precio, precio_mayor, quantity, imagen, id, codigo } = req.body;
+    const { username, nombre, precio, precio_mayor, quantity, imagen, id, codigo, tallas, tallas_zapatos } = req.body;
     try {
         
         
-        console.log(username, nombre, precio, precio_mayor, quantity, id, codigo)
+        console.log(username, nombre, precio, precio_mayor, quantity, id, codigo, tallas, tallas_zapatos)
         // console.log(JSON.parse(username))
 
         const user = await User.findOne({ username });
@@ -47,7 +47,9 @@ async function updateCart (req, res) {
                 quantity,
                 imagen,
                 product: id,
-                codigo: codigo
+                codigo: codigo,
+                tallas,
+                tallas_zapatos
             });
         }
 
