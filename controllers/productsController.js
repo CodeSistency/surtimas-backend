@@ -212,7 +212,7 @@ const createNewProduct = async (req, res) => {
         
     }
     console.log(req.body)
-    const {titulo, precio, precio_mayor, descripcion, codigo, tipo, sexo, tallas_zapatos, tallas, imagen, imagenes} = req.body
+    const {titulo, precio, precio_mayor, descripcion, codigo, tipo, sexo, tallas_zapatos, tallas, imagen, imagenes, descuento, descuento_cantidad, comparar} = req.body
 
    
     try {
@@ -224,9 +224,12 @@ const createNewProduct = async (req, res) => {
             descripcion: descripcion,
             precio: precio,
             precio_mayor: precio_mayor,
+            comparar: comparar,
             tipo: tipo,
             sexo: sexo,
             codigo: codigo,
+            descuento: descuento,
+            descuento_cantidad: descuento_cantidad,
             tallas: JSON.parse(tallas),
             tallas_zapatos: JSON.parse(tallas_zapatos),
             imagen: imagen,
@@ -264,6 +267,9 @@ async function updateProduct(req, res) {
       if (updateData.tipo) product.tipo = updateData.tipo;
       if (updateData.codigo) product.codigo = updateData.codigo;
       if (updateData.sexo) product.sexo = updateData.sexo;
+      if (updateData.descuento) product.descuento = updateData.descuento;
+      if (updateData.descuento_cantidad) product.descuento_cantidad = updateData.descuento_cantidad;
+      if (updateData.comparar) product.comparar = updateData.comparar;
       if (updateData.tallas) product.tallas = updateData.tallas;
       if (updateData.tallas_zapatos) product.tallas_zapatos = updateData.tallas_zapatos;
       if (updateData.imagen) product.imagen = updateData.imagen;

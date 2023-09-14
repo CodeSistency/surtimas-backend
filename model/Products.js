@@ -100,6 +100,18 @@ const productSchema = new Schema({
     type: String,
     default: "",
   },
+  comparar: {
+    type: Number,
+    default: 0,
+  },
+  descuento: {
+    type: Boolean,
+    default: false
+  },
+  descuento_cantidad: {
+    type: Number,
+    
+  },
   sexo: {
     type: String,
     default: "",
