@@ -226,7 +226,7 @@ const createNewProduct = async (req, res) => {
             precio_mayor: precio_mayor,
             comparar: comparar,
             tipo: tipo,
-            sexo: sexo,
+            sexo: sexo.at[0],
             codigo: codigo,
             descuento: descuento,
             descuento_cantidad: descuento_cantidad,
