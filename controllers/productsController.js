@@ -213,7 +213,8 @@ const createNewProduct = async (req, res) => {
     }
     console.log(req.body)
     const {titulo, precio, precio_mayor, descripcion, codigo, tipo, sexo, tallas_zapatos, tallas, imagen, imagenes, descuento, descuento_cantidad, comparar} = req.body
-    console.log(sexo)
+    console.log(sexo.at(0))
+    const sexoo = sexo.at(0)
    
     try {
 
@@ -226,7 +227,7 @@ const createNewProduct = async (req, res) => {
             precio_mayor: precio_mayor,
             comparar: comparar,
             tipo: tipo,
-            sexo: sexo.at(0)[0],
+            sexo: sexoo,
             codigo: codigo,
             descuento: descuento,
             descuento_cantidad: descuento_cantidad,
