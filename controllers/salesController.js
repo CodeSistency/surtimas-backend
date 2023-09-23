@@ -20,6 +20,14 @@ const newSale = async (req, res) => {
     try {
         const { productos } = req.body;
         const savedRecords = [];
+
+        const salesRecord = new SalesTracking({
+          product: productos,
+          referencia,
+          metodo,
+          total,
+          date: new Date()
+        });
     
         // Loop through the array of sales data and create a new sales tracking record for each sale
         for (const product of productos) {
@@ -27,16 +35,23 @@ const newSale = async (req, res) => {
           
     
           // Create a new sales tracking record
-          const salesRecord = new SalesTracking({
-            product: {
-              codigo,
-              titulo,
-              precio,
-              tallas,
-              tallas_zapatos,
-            },
-            date: new Date(),
-          });
+          // const salesRecord = new SalesTracking({
+          //   product: productos,
+          //   referencia,
+          //   metodo,
+          //   total,
+          //   date: new Date()
+          // });
+          // const salesRecord = new SalesTracking({
+          //   product: {
+          //     codigo,
+          //     titulo,
+          //     precio,
+          //     tallas,
+          //     tallas_zapatos,
+          //   },
+          //   date: new Date(),
+          // });
     
           const savedRecord = await salesRecord.save();
           savedRecords.push(savedRecord);
