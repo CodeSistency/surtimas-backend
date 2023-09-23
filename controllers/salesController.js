@@ -18,7 +18,7 @@ const updateProductQuantity = async (codigo, size, color, quantity) => {
 
 const newSale = async (req, res) => {
     try {
-        const { productos } = req.body;
+        const { productos, referencia, metodo, total } = req.body;
         const savedRecords = [];
 
         const salesRecord = new SalesTracking({
