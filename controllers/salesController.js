@@ -2,6 +2,11 @@ const SalesTracking = require('../model/SalesTracking');
 const Product = require('../model/Products');
 
 // Function to calculate the total quantity sold and revenue for a sale
+const getAllSales = async (req, res) => {
+  const sale = await SalesTracking.find();
+  if (!sale) return res.status(204).json({ 'message': 'No Sale found.' });
+  res.json(sale);
+}
 
 const updateProductQuantity = async (codigo, size, color, quantity) => {
     try {
@@ -102,4 +107,55 @@ const createNewProduct = async (req, res) => {
     }
 }
 
-module.exports = {createNewProduct, newSale}
+const deleteSale = async (req, res) => {
+  const saleId = req.params.id; // Get the product ID from URL parameter
+  console.log(saleId)
+
+  if (!saleId) {
+      return res.status(400).json({ 'message': 'Product ID required.' });
+  }
+
+  // ... rest of your code ...
+
+  try {
+      const sale = await SalesTracking.findOne({ _id: saleId }).exec();
+      if (!sale) {
+          return res.status(204).json({ "message": `No sale matches ID ${saleId}.` });
+      }
+
+      console.log(sale)
+
+      for (const product of sale.product) {
+        const { codigo, sold } = product;
+        const productToUpdate = await Product.findOne({ codigo });
+
+      //   if (productToUpdate) {
+      //     console.log(productToUpdate)
+      //     productToUpdate.cantidad += sold; // Update the quantity by adding the sold quantity
+      //     await productToUpdate.save();
+      //   }
+      // }
+
+      if (productToUpdate) {
+        for (const [, sizes] of Object.entries(productToUpdate)) {
+          
+          for (const size of sizes) {
+            console.log(size)
+            size.quantity += sold; // Update the quantity by adding the sold quantity
+          }
+        }
+
+        await productToUpdate.save();
+      }
+    }
+
+      const result = await SalesTracking.deleteOne({ _id: saleId });
+      res.json(result);
+  } catch (err) {
+      console.error(err);
+      res.status(500).json({ "message": "Server Error" });
+  }
+}
+
+
+module.exports = {createNewProduct, newSale, getAllSales, deleteSale}
