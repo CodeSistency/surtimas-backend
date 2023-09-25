@@ -130,17 +130,35 @@ const deleteSale = async (req, res) => {
       //   }
       // }
 
-      if (productToUpdate) {
-        for (const [, sizes] of Object.entries(productToUpdate)) {
+      // if (productToUpdate) {
+      //   for (const [, sizes] of Object.entries(productToUpdate)) {
           
-          for (const size of sizes) {
-            console.log(size)
-            size.quantity += sold; // Update the quantity by adding the sold quantity
-          }
-        }
+      //     for (const size of sizes) {
+      //       console.log(size)
+      //       size.quantity += sold; // Update the quantity by adding the sold quantity
+      //     }
+      //   }
 
-        await productToUpdate.save();
+      //   await productToUpdate.save();
+      // }
+
+      if(productToUpdate) {
+
+        console.log(productToUpdate)
+         
+          // Object.entries(product?.tallas).map(([size, colors])=>
+          // colors.map((color, index) =>
+          // color.quantity > 0 && 
+            
+          Object.entries(productToUpdate?.tallas).map(([size, colors]) =>
+          colors.map((color, index) =>
+            color.quantity += color.sold
+          )
+          )
+          
       }
+
+      await productToUpdate.save();
     }
 
       const result = await SalesTracking.deleteOne({ _id: saleId });
