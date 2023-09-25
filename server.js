@@ -49,7 +49,7 @@ app.use('/logout', require('./routes/logout'));
 // Apply verifyJWT middleware only to specific routes that require authentication
 app.use('/users', verifyJWT, require('./routes/api/users'));
 app.use('/products', verifyJWT, require('./routes/api/products'));
-app.use('/sales', verifyJWT, require('./routes/api/sales'));
+// app.use('/sales', verifyJWT, require('./routes/api/sales'));
 
 // Allow GET requests without authentication
 app.use('/cart', require('./routes/api/cart'));
