@@ -26,16 +26,36 @@ const newSale = async (req, res) => {
         const { productos, referencia, metodo, total } = req.body;
         const savedRecords = [];
 
+        let totalRevenue = 0;
+        const calculateTotalRevenue = () => {
+          
+          productos.forEach((product) => {
+            Object.values(product.tallas).forEach((colors) => {
+              colors.forEach((color) => {
+                const sold = parseInt(color.sold, 10) || 0;
+                const precio = parseInt(product.precio, 10) || 0;
+                totalRevenue += sold * precio;
+              });
+            });
+          });
+          
+          return totalRevenue;
+          // setTotal(totalRevenue)
+        };
+        calculateTotalRevenue()
+
         const salesRecord = new SalesTracking({
           product: productos,
           referencia,
           metodo,
-          total,
+          total: totalRevenue,
           date: new Date()
         });
     
         // Loop through the array of sales data and create a new sales tracking record for each sale
         for (const product of productos) {
+
+         
           const { codigo, titulo, precio, tallas, tallas_zapatos } = product;
           
     
@@ -79,33 +99,7 @@ const newSale = async (req, res) => {
       }
 }
 
-const createNewProduct = async (req, res) => {
-    const {originalname,path} = req.file;
-  const parts = originalname.split('.');
-  const ext = parts[parts.length - 1];
-  const newPath = path+'.'+ext;
-  fs.renameSync(path, newPath);
 
-    if (!req?.body?.titulo || !req?.body?.descripcion) {
-        return res.status(400).json({ 'message': 'First and last names are required' });
-    }
-
-    try {
-        const result = await Product.create({
-            titulo: req.body.titulo,
-            descripcion: req.body.descripcion,
-            precio: req.body.precio,
-            tallas: req.body.tallas,
-            imagen: ""
-            
-
-        });
-
-        res.status(201).json(result);
-    } catch (err) {
-        console.error(err);
-    }
-}
 
 const deleteSale = async (req, res) => {
   const saleId = req.params.id; // Get the product ID from URL parameter
