@@ -5,12 +5,12 @@ const ROLES_LIST = require('../../config/roles_list');
 const verifyRoles = require('../../middleware/verifyRoles');
 const upload = require("../../middleware/upload")
 
-router.route('/').post(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor), salesController.newSale).get(salesController.getAllSales)
+router.route('/').post(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor), salesController.newSale).get(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor), salesController.getAllSales)
     // .put(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor), productController.updateProduct)
     // .delete(verifyRoles(ROLES_LIST.Admin), productController.deleteProduct);
     
 
-router.route('/:id').delete(salesController.deleteSale)
+router.route('/:id').delete(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor),salesController.deleteSale)
 //     .get(productController.getProduct)
 //     .delete(verifyRoles(ROLES_LIST.Admin),  productController.deleteProduct)
 //     .put(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor), productController.updateProduct)
