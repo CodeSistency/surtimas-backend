@@ -121,7 +121,7 @@ const deleteSale = async (req, res) => {
 
       for (const product of sale.product) {
         const { codigo, sold } = product;
-        const productToUpdate = await Product.findOne({ codigo });
+        const productToUpdate = await SalesTracking.findOne({ codigo });
 
       //   if (productToUpdate) {
       //     console.log(productToUpdate)
