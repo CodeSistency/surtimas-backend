@@ -152,10 +152,10 @@ const deleteSale = async (req, res) => {
             
           Object.entries(productToUpdate?.tallas).map(([size, colors]) => {
 
-            console.log(colors)
-            
+            // console.log(colors)
+
             colors.map((color, index) =>{
-              console.log(color)
+              console.log(`'color' ${color}, 'color quantity:', ${color.quantity}, 'color sold', ${color.sold} `)
               color.quantity += color.sold
             }
               
