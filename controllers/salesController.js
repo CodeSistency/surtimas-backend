@@ -151,8 +151,10 @@ const deleteSale = async (req, res) => {
           // color.quantity > 0 && 
             
           Object.entries(productToUpdate?.tallas).map(([size, colors]) =>
+          
           colors.map((color, index) =>
-            color.quantity += color.sold
+            
+            color.quantity.parseInt() += color.sold.parseInt()
           )
           )
           
