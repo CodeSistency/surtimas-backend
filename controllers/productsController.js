@@ -24,7 +24,7 @@ const getAllProducts = async (req, res) => {
 // }
 
 const searchProducts = async (req, res) => {
-  const searchTerm = req.query.txt;
+  const searchTerm = req.params.search;
 
   try {
     const products = await Product.find(
