@@ -120,12 +120,12 @@ precio_mayor: {
 const userSchema = new Schema({
   nombre: {
     type: String,
-    required: true,
+    // required: true,
     
 },
 apellido: {
   type: String,
-  required: true,
+  // required: true,
 
 },
     username: {
@@ -135,7 +135,7 @@ apellido: {
     },
     email: {
       type: String,
-      required: true,
+      // required: true,
       unique: true,
   },
     roles: {
