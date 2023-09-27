@@ -318,8 +318,10 @@ const deleteProduct = async (req, res) => {
 
     try {
         const product = await Product.findOne({ _id: productId }).exec();
+        console(product)
         if (!product) {
             return res.status(204).json({ "message": `No Product matches ID ${productId}.` });
+            console.log('product not found')
         }
 
         const result = await Product.deleteOne({ _id: productId });
