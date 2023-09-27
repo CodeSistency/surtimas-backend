@@ -84,8 +84,16 @@ const newSale = async (req, res) => {
           // Update the quantity in the Products model
           const productToUpdate = await Product.findOne({ codigo });
       if (productToUpdate) {
+        // productToUpdate?.product?.map(product => {
+
+        //       product.tallas = tallas;
+        //       product.tallas_zapatos = tallas_zapatos;
+        //     }
+        //   )
         productToUpdate.tallas = tallas;
-        productToUpdate.tallas_zapatos = tallas_zapatos; // Update the entire "tallas" object in the product
+        productToUpdate.tallas_zapatos = tallas_zapatos;
+         // Update the entire "tallas" object in the product
+
         await productToUpdate.save();
       }
 
@@ -121,7 +129,7 @@ const deleteSale = async (req, res) => {
 
       for (const product of sale.product) {
         const { codigo, sold } = product;
-        const productToUpdate = await SalesTracking.findOne({ codigo });
+        const productToUpdate = await Product.findOne({ codigo });
 
       //   if (productToUpdate) {
       //     console.log(productToUpdate)
@@ -144,13 +152,13 @@ const deleteSale = async (req, res) => {
 
       if(productToUpdate) {
 
-        console.log(productToUpdate)
+        // console.log(productToUpdate.product[0].tallas)
          
           // Object.entries(product?.tallas).map(([size, colors])=>
           // colors.map((color, index) =>
           // color.quantity > 0 && 
-            
-          Object.entries(productToUpdate?.tallas).map(([size, colors]) => {
+          productToUpdate?.product?.forEach((product) =>
+          Object.entries(product?.tallas).map(([size, colors]) => {
 
             // console.log(colors)
 
@@ -163,6 +171,9 @@ const deleteSale = async (req, res) => {
           }
           
           )
+          )
+            
+          
           
       }
 

@@ -12,6 +12,12 @@ const colorSchema = new Schema({
     // required: true,
     default: 0,
   },
+  sold: {
+    type: Number,
+    // required: true,
+    default: 0,
+  },
+
 });
 
 const comentarioSchema = new Schema({
