@@ -11,11 +11,30 @@ const getAllProducts = async (req, res) => {
     res.json(product);
 }
 
+// const searchProducts = async (req, res) => {
+//   const searchTerm = req.query.query;
+
+//   try {
+//     const products = await Product.find({ $titulo: { $search: searchTerm } });
+//     res.json(products);
+//   } catch (error) {
+//     res.status(500).json({ error: 'An error occurred while searching for products.' });
+//   }
+
+// }
+
 const searchProducts = async (req, res) => {
-  const searchTerm = req.query.query;
+  const searchTerm = req.params.search;
 
   try {
-    const products = await Product.find({ $titulo: { $search: searchTerm } });
+    const products = await Product.find(
+      {
+       '$or':[
+        {titulo: {$regex:searchTerm}}
+       ]
+      }
+       
+      );
     res.json(products);
   } catch (error) {
     res.status(500).json({ error: 'An error occurred while searching for products.' });

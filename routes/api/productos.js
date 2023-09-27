@@ -19,7 +19,7 @@ const upload = multer({ storage: storage })
 
 router.route('/').get(productController.getAllProducts)
 
-router.route('/search').get(productController.searchProducts)
+router.route('/search/:search').get(productController.searchProducts)
 
 router.put('/comentario', productController.updateComentario);  
 
