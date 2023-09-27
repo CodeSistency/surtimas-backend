@@ -284,7 +284,7 @@ async function updateProduct(req, res) {
       if (updateData.titulo) product.titulo = updateData.titulo;
       if (updateData.descripcion) product.descripcion = updateData.descripcion;
       if (updateData.precio) product.precio = updateData.precio;
-      if (updateData.precio_mayor) product.precio_mayor = updateData.precio_mayor;
+      if (updateData.precioAlMayor) product.precio_mayor = updateData.precioAlMayor;
       if (updateData.tipo) product.tipo = updateData.tipo;
       if (updateData.codigo) product.codigo = updateData.codigo;
       if (updateData.sexo) product.sexo = updateData.sexo;
