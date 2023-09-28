@@ -313,18 +313,20 @@ const deleteProduct = async (req, res) => {
     if (!productId) {
         return res.status(400).json({ 'message': 'Product ID required.' });
     }
-
+    console.log(productId)
     // ... rest of your code ...
 
     try {
         const product = await Product.findOne({ _id: productId }).exec();
-        console(product)
+        console.log(product)
         if (!product) {
+          console.log('product not found')
             return res.status(204).json({ "message": `No Product matches ID ${productId}.` });
-            console.log('product not found')
+            
         }
 
         const result = await Product.deleteOne({ _id: productId });
+        console.log(result)
         res.json(result);
     } catch (err) {
         console.error(err);
