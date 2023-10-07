@@ -7,6 +7,11 @@ const colorSchema = new Schema({
     // required: true,
     default: ""
   },
+  color_seleccionado: {
+    type: String,
+    // required: true,
+    default: ""
+  },
   quantity: {
     type: Number,
     // required: true,
