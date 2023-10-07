@@ -48,7 +48,7 @@ const newSale = async (req, res) => {
           product: productos,
           referencia,
           metodo,
-          total: totalRevenue,
+          total: total? total : totalRevenue,
           date: new Date()
         });
     
@@ -164,7 +164,7 @@ const deleteSale = async (req, res) => {
 
             colors.map((color, index) =>{
               console.log(`'color' ${color}, 'color quantity:', ${color.quantity}, 'color sold', ${color.sold} `)
-              color.quantity += color.sold
+              color.quantity = color.quantity + color.sold
             }
               
             )
