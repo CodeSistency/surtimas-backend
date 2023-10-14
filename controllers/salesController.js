@@ -163,7 +163,7 @@ const deleteSale = async (req, res) => {
             // console.log(colors)
 
             colors.map((color, index) =>{
-              console.log(`'color' ${color}, 'color quantity:', ${color.quantity}, 'color sold', ${color.sold} `)
+              console.log(`'color' ${color}, 'color quantity:', ${color.quantity}, 'color sold', ${color.sold}, 'new color quantity: ${color.quantity += color.sold}' `)
               color.quantity = color.quantity + color.sold
             }
               
@@ -174,7 +174,7 @@ const deleteSale = async (req, res) => {
           )
             
           
-          
+          console.log(productToUpdate)
       }
 
       await productToUpdate.save();
