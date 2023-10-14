@@ -215,6 +215,44 @@ const getProductsByGender = async (req, res) => {
     res.json(products);
 }
 
+const getProductsByGenderSome = async (req, res) => {
+  try {
+    const gender = req.params.gender; // 'men', 'women', etc. passed as a URL parameter
+    const products = await Product.aggregate([
+      { $match: { sexo: gender } },
+      { $sample: { size: 45 } }
+    ]);
+    
+    if (products.length === 0) {
+      return res.status(204).json({ message: 'No products found.' });
+    }
+    
+    res.json(products);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+const getProductsByTypeSome = async (req, res) => {
+  try {
+    const type = req.params.type; // 'shoes', 'toys', etc. passed as a URL parameter
+    const products = await Product.aggregate([
+      { $match: { tipo: type } },
+      { $sample: { size: 45 } }
+    ]);
+
+    if (products.length === 0) {
+      return res.status(204).json({ message: 'No products found.' });
+    }
+
+    res.json(products);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
 const getProductsByType = async (req, res) => {
     const type = req.params.type; // 'shoes', 'toys', etc. passed as a URL parameter
     const products = await Product.find({ tipo: type });
@@ -403,5 +441,7 @@ module.exports = {
     updateComentario,
     getAllComentarios,
     searchProducts,
-    getQRProducts
+    getQRProducts,
+    getProductsByGenderSome,
+    getProductsByTypeSome
 }

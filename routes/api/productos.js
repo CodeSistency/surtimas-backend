@@ -36,6 +36,8 @@ router.get('/random', productController.getAllRandomProducts);
 router.get('/gender/:gender', productController.getProductsByGender);
 router.get('/tipo/:type', productController.getProductsByType);
     
+router.get('/gender/:gender/some', productController.getProductsByGenderSome);
+router.get('/tipo/:type/some', productController.getProductsByTypeSome);
 
 router.route('/:id')
     .get(productController.getProduct)
