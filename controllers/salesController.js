@@ -135,18 +135,40 @@ const deleteSale = async (req, res) => {
 
   
 
+        // if (productToUpdate) {
+        //   productToUpdate.tallas = Object.entries(product.tallas).map(([size, colors]) => {
+        //     colors.map(color => {
+        //       color.quantity += color.sold
+        //     })
+        //     return { size, colors }
+        //   })
+          
+          
+        //   console.log(productToUpdate.tallas)
+  
+        //   await productToUpdate.save(); // Save the updated product
+        // }
+
         if (productToUpdate) {
-          productToUpdate.tallas = Object.entries(product.tallas).map(([size, colors]) => {
-            colors.map(color => {
-              color.quantity += color.sold
-            })
-            return { size, colors }
-          })
+          for (const size in product.tallas) {
+            if (Object.prototype.hasOwnProperty.call(product.tallas, size)) {
+              const colors = product.tallas[size];
+              for (const color of colors) {
+                const existingColor = productToUpdate.tallas[size].find(
+                  (c) => c.color === color.color
+                );
+                if (existingColor) {
+                  existingColor.quantity += color.sold;
+                }
+              }
+            }
+          }
   
-          console.log(productToUpdate)
+          console.log(productToUpdate);
   
-          await productToUpdate.save(); // Save the updated product
+          await productToUpdate.save();
         }
+      
       }
   
 
