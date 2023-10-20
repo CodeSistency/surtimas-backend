@@ -128,51 +128,19 @@ const deleteSale = async (req, res) => {
       console.log(sale)
 
       for (const product of sale.product) {
-        const { codigo, sold } = product;
+        
         const productToUpdate = await Product.findOne({ codigo });
 
-      //   if (productToUpdate) {
-      //     console.log(productToUpdate)
-      //     productToUpdate.cantidad += sold; // Update the quantity by adding the sold quantity
-      //     await productToUpdate.save();
-      //   }
-      // }
-
-      // if (productToUpdate) {
-      //   for (const [, sizes] of Object.entries(productToUpdate)) {
-          
-      //     for (const size of sizes) {
-      //       console.log(size)
-      //       size.quantity += sold; // Update the quantity by adding the sold quantity
-      //     }
-      //   }
-
-      //   await productToUpdate.save();
-      // }
+  
 
       if(productToUpdate) {
 
-        // console.log(productToUpdate.product[0].tallas)
-         
-          // Object.entries(product?.tallas).map(([size, colors])=>
-          // colors.map((color, index) =>
-          // color.quantity > 0 && 
-          productToUpdate?.product?.forEach((product) =>
-          Object.entries(product?.tallas).map(([size, colors]) => {
+        productToUpdate.tallas = Object.entries(product.tallas).map(([size, colors]) => {
+          colors.map(color => {
+            color.quantity += color.sold
+          })
+        })
 
-            // console.log(colors)
-
-            colors.map((color, index) =>{
-              console.log(`'color' ${color}, 'color quantity:', ${color.quantity}, 'color sold', ${color.sold}, 'new color quantity: ${color.quantity += color.sold}' `)
-              color.quantity = color.quantity + color.sold
-            }
-              
-            )
-          }
-          
-          )
-          )
-            
           
           console.log(productToUpdate)
       }
