@@ -128,6 +128,8 @@ const deleteSale = async (req, res) => {
       console.log(sale)
 
       for (const product of sale.product) {
+
+        const {codigo} = product
         
         const productToUpdate = await Product.findOne({ codigo });
 
