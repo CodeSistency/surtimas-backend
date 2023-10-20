@@ -135,20 +135,20 @@ const deleteSale = async (req, res) => {
 
   
 
-      if(productToUpdate) {
-
-        productToUpdate.tallas = Object.entries(product.tallas).map(([size, colors]) => {
-          colors.map(color => {
-            color.quantity += color.sold
+        if (productToUpdate) {
+          productToUpdate.tallas = Object.entries(product.tallas).map(([size, colors]) => {
+            colors.map(color => {
+              color.quantity += color.sold
+            })
+            return { size, colors }
           })
-        })
-
-          
+  
           console.log(productToUpdate)
+  
+          await productToUpdate.save(); // Save the updated product
+        }
       }
-
-      await productToUpdate.save();
-    }
+  
 
       const result = await SalesTracking.deleteOne({ _id: saleId });
       res.json(result);
