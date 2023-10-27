@@ -31,9 +31,13 @@ const searchProducts = async (req, res) => {
     const products = await Product.find(
 
 
-     { titulo: { $regex: new RegExp(searchTerm, 'i') } },
-     { codigo: { $regex: new RegExp(searchTerm, 'i') } }
-
+    //  { titulo: { $regex: new RegExp(searchTerm, 'i') } },
+    //  { codigo: { $regex: new RegExp(searchTerm, 'i') } }
+ {   $or: [
+      { titulo: { $regex: new RegExp(searchTerm, 'i') } },
+      { codigo: { $regex: new RegExp(searchTerm, 'i') } }
+    ]
+  }
        
       );
     res.json(products);
