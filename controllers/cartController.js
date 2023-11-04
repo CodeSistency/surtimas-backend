@@ -32,7 +32,7 @@ async function updateCart (req, res) {
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
-
+        console.log(user.cart)
         // Check if the cart item already exists in the user's cart
         const existingCartItem = user.cart.cartProducts.find(item => item.product === id);
 
