@@ -62,6 +62,61 @@ async function updateCart (req, res) {
     }
 }
 
+async function updateCartList(req, res) {
+    const { username, cart } = req.body; // Assuming you pass the entire cart in the request
+
+    try {
+        const user = await User.findOne({ username });
+
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        // Iterate through the new cart and update items in the user's cart
+        for (const newItem of cart) {
+            const existingCartItem = user.cart.find(item => item.product === newItem.product);
+
+            if (existingCartItem) {
+                // Update the quantity of the existing cart item
+                existingCartItem.quantity = newItem.quantity;
+            } else {
+                // If the item doesn't exist in the user's cart, add it
+                user.cart.push(newItem);
+            }
+        }
+
+        await user.save();
+
+        return res.json({ message: 'Cart updated successfully' });
+    } catch (error) {
+        console.error('Error:', error);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+async function updateWholeCart(req, res) {
+    const { username, cart } = req.body; // Assuming you pass the entire cart in the request
+
+    try {
+        const user = await User.findOne({ username });
+
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        // Replace the user's cart with the new cart data
+        user.cart = cart;
+
+        await user.save();
+
+        return res.json({ message: 'Cart updated successfully' });
+    } catch (error) {
+        console.error('Error:', error);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+
 async function deleteCartProduct(req, res) {
     try {
         const { username, id } = req.params;
@@ -92,4 +147,4 @@ async function deleteCartProduct(req, res) {
 }
 
 
-module.exports = {updateCart, getAllCartProducts, deleteCartProduct}
+module.exports = {updateCart, updateWholeCart, getAllCartProducts, deleteCartProduct, updateCartList}

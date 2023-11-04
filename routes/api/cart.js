@@ -10,9 +10,12 @@ const verifyRoles = require('../../middleware/verifyRoles');
 router.route('/')
     .put(cartController.updateCart)
     // .get(productController.getAllProducts)
-    
-    
+router.route('/cart')
+    .put(cartController.updateWholeCart)
 
+router.route('/UpdateCart')
+    .put(cartController.updateCartList)
+    
 router.route('/:username')
     .get(cartController.getAllCartProducts)
 
