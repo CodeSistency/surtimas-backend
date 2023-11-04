@@ -88,6 +88,7 @@ async function updateCartList(req, res) {
             } else {
                 // If the item doesn't exist in the user's cart, add it
                 user.cart.push(newItem);
+                console.log("creo otro")
             }
         }
 
