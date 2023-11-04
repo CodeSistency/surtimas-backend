@@ -34,7 +34,7 @@ async function updateCart (req, res) {
         }
 
         // Check if the cart item already exists in the user's cart
-        const existingCartItem = user.cart.find(item => item.product === id);
+        const existingCartItem = user.cart.cartProducts.find(item => item.product === id);
 
         if (existingCartItem) {
             // Update the quantity of the existing cart item
