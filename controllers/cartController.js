@@ -78,7 +78,13 @@ async function updateCartList(req, res) {
 
             if (existingCartItem) {
                 // Update the quantity of the existing cart item
-                existingCartItem.quantity = newItem.quantity;
+                // existingCartItem.quantity = newItem.quantity;
+                // existingCartItem.deseo = newItem.deseo;
+                // existingCartItem.sold = newItem.sold;
+                existingCartItem.tallas = newItem.tallas;
+
+
+
             } else {
                 // If the item doesn't exist in the user's cart, add it
                 user.cart.push(newItem);
