@@ -76,15 +76,12 @@ async function updateCartList(req, res) {
         for (const newItem of cart) {
             console.log(newItem.product)
             console.log(user)
-            const existingCartItem = user.cart.find(item => item.product === newItem.product);
+            const existingCartItem = user.cart.find(item => item.product.toString() === newItem.product);
             console.log(existingCartItem)
 
             if (existingCartItem) {
                 console.log("existe")
-                // Update the quantity of the existing cart item
-                // existingCartItem.quantity = newItem.quantity;
-                // existingCartItem.deseo = newItem.deseo;
-                // existingCartItem.sold = newItem.sold;
+                
                 existingCartItem.tallas = newItem.tallas;
 
 
