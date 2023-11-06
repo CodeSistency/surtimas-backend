@@ -76,6 +76,7 @@ async function updateCartList(req, res) {
         for (const newItem of cart) {
             console.log(newItem.product)
             const existingCartItem = user.cart.find(item => item.product === newItem.product);
+            console.log(existingCartItem)
 
             if (existingCartItem) {
                 // Update the quantity of the existing cart item
@@ -86,10 +87,6 @@ async function updateCartList(req, res) {
 
 
 
-            } else {
-                // If the item doesn't exist in the user's cart, add it
-                user.cart.push(newItem);
-                console.log("creo otro")
             }
         }
 
