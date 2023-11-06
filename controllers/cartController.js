@@ -76,7 +76,7 @@ async function updateCartList(req, res) {
         for (const newItem of cart) {
             console.log(newItem.product)
             console.log(user)
-            const existingCartItem = user.cart.find(item => item.product === newItem._id);
+            const existingCartItem = user.cart.find(item => item.product === newItem.product);
             console.log(existingCartItem)
 
             if (existingCartItem) {
